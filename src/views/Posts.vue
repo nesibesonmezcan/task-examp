@@ -1,38 +1,140 @@
 <template>
-  <v-container>
+ 
     <main>
       <UserGo @click="router.push(`/`)" />
-      <v-dialog width="500">
-        <template v-slot:activator="{ props }" >
-          <v-btn v-bind="props" text=""> </v-btn>
-        </template>
-
-        <template v-slot:default="{ isActive }">
-          <v-card title="Dialog">
-            <v-card-text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua.
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-
-              <v-btn text="Close Dialog" @click="isActive.value = false"></v-btn>
-            </v-card-actions>
-          </v-card>
-        </template>
-      </v-dialog>
+    <div v-for="post in userStore.posts" :key="post.id">
+      {{ post.userId }}
+    </div>
     </main>
-  </v-container>
+  
 </template>
   
 <script setup>
 import UserGo from '@/components/UserGo.vue'
-import router from '@/router';
+import router from '@/router'
+import { useUserStore } from "@/store/userStore";
+import { onBeforeMount } from "vue";
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+const userStore = useUserStore();
+
+console.log("la", route);
+onBeforeMount(async () => {
+  const userId = route.params.id
+  const filter = {
+    userId: userId,
+  }
+  console.log(filter)
+  await userStore.fetchPosts(filter);
+});
+
+// export default {
+//   data() {
+//     return {
+//       posts: [
+      
+//   {
+//     "id": 1,
+//     "title": "Evde Kedi Besliyor Musunuz?",
+//     "messages": [
+//       {
+//         "sender": "Ben",
+//         "content": "Evet, evde bir kedi besliyorum. Oldukça sevimli ve oyuncu bir dostum var."
+//       },
+//       {
+//         "sender": "Ziyaretçi",
+//         "content": "Kediler harika dostlar, hangi cins?"
+//       },
+//       {
+//         "sender": "Ben",
+//         "content": "Sokaklardan birini sahiplendik, cinsi belirsiz ama harika bir karakteri var."
+//       }
+//     ]
+//   },
+//   {
+//     "id": 2,
+//     "title": "Arabanız Var Mı?",
+//     "messages": [
+//       {
+//         "sender": "Ben",
+//         "content": "Hayır, arabam yok ama genellikle toplu taşıma veya bisiklet kullanıyorum."
+//       },
+//       {
+//         "sender": "Ziyaretçi",
+//         "content": "Bisiklet sürmek harika bir egzersizdir."
+//       }
+//     ]
+//   },
+//   {
+//     "id": 3,
+//     "title": "Evli Misiniz?",
+//     "messages": [
+//       {
+//         "sender": "Ben",
+//         "content": "Evet, evliyim ve mutlu bir evliliğim var."
+//       },
+//       {
+//         "sender": "Ziyaretçi",
+//         "content": "Mutluluklar dilerim!"
+//       }
+//     ]
+//   },
+//   {
+//     "id": 4,
+//     "title": "Evde Kedi Besliyor Musunuz?",
+//     "messages": [
+//       {
+//         "sender": "Ben",
+//         "content": "Evet, evde bir kedi besliyorum. Oldukça sevimli ve oyuncu bir dostum var."
+//       },
+//       {
+//         "sender": "Ziyaretçi",
+//         "content": "Kediler harika dostlar, hangi cins?"
+//       },
+//       {
+//         "sender": "Ben",
+//         "content": "Sokaklardan birini sahiplendik, cinsi belirsiz ama harika bir karakteri var."
+//       }
+//     ]
+//   },
+//   {
+//     "id": 5,
+//     "title": "Arabanız Var Mı?",
+//     "messages": [
+//       {
+//         "sender": "Ben",
+//         "content": "Hayır, arabam yok ama genellikle toplu taşıma veya bisiklet kullanıyorum."
+//       },
+//       {
+//         "sender": "Ziyaretçi",
+//         "content": "Bisiklet sürmek harika bir egzersizdir."
+//       }
+//     ]
+//   },
+//   {
+//     "id": 6,
+//     "title": "Evli Misiniz?",
+//     "messages": [
+//       {
+//         "sender": "Ben",
+//         "content": "Evet, evliyim ve mutlu bir evliliğim var."
+//       },
+//       {
+//         "sender": "Ziyaretçi",
+//         "content": "Mutluluklar dilerim!"
+//       }
+//     ]
+//   }
+// ]      
+//     };
+//   }
+// };
 
 
 </script>
-  
+
+
 <style scoped>
 div {
   padding: 25px;

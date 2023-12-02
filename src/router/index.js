@@ -7,7 +7,7 @@ const routes = [
     redirect:{name: 'home'},
     children: [
       {
-        path: "home", // Boş path için ana sayfa
+        path: "home", 
         name: "home",
         component: () => import("@/views/Home.vue"),
       },
@@ -37,7 +37,7 @@ const routes = [
                 component: () => import("@/views/albums/Albums.vue"),
               },
               {
-                path: "album-detail", // Albüm detayları için ID ile
+                path: "album-detail/:id", // Albüm detayları için ID ile
                 name: "album-detail",
                 component: () => import("@/views/albums/albums-details/AlbumDetail.vue"),
               },
