@@ -1,5 +1,6 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="app">
+
     <v-navigation-drawer v-model="drawer">
       <div class="navigation-drawer">
         <component :is="dynamicComponent" />
@@ -14,38 +15,47 @@
 
 
     <v-main>
-      <router-view />
+      <router-view></router-view>
     </v-main>
+
   </v-app>
 </template>
 
 <script setup>
 import UserLeft from '@/components/UserLeft.vue'
-import { RouterView } from "vue-router"
-import { ref,shallowRef,watch } from 'vue';
 import UserProfil from './components/UserProfil.vue';
+
+import { RouterView } from "vue-router"
+import { ref, shallowRef, watch } from 'vue';
 import { useRoute } from 'vue-router'
+import { watchEffect } from 'vue';
 
 
 const drawer = ref(true)
 const route = useRoute()
 
-watch(()=>
- route.name,
- ()=>{
-  if (route.name === "home") {
-    dynamicComponent.value= (UserLeft)
-  } else {
-     dynamicComponent.value=(UserProfil)
-  }
-})
+watch(() =>
+  route.name,
+  () => {
+    if (route.name === "home") {
+      dynamicComponent.value = (UserLeft)
+    } else {
+      dynamicComponent.value = (UserProfil)
+    }
+  })
 
 const dynamicComponent = shallowRef(UserLeft)
+
+
+
+const title = ref('N2MOBİL');
+
+watchEffect(() => {
+  document.title = route.meta.title || title.value;
+});
 </script>
 
 <style>
-#inspire {}
-
 .navigation-drawer {
   display: flex;
   flex-direction: column;
@@ -61,6 +71,4 @@ const dynamicComponent = shallowRef(UserLeft)
   align-items: center;
   justify-content: space-between;
 }
-
-.logo {}
 </style>

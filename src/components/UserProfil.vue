@@ -4,34 +4,33 @@
     <div class="fill-height">
       <div class="user-profil">
         <img src="/clean1.jpg" alt="" height="45">
-       <div> 
-        <h4 class="selected-name" >{{ userStore.selectedUser.name}}</h4>
-        <p>{{userStore.selectedUser.email  }}</p>
+        <div>
+          <h4 class="selected-name">{{ userStore.selectedUser.name }}</h4>
+          <p>{{ userStore.selectedUser.email }}</p>
         </div>
       </div>
       <hr>
       <div class="user-iconn">
         <div>
-          <router-link  :to="{name: 'todos'}" 
-          :class="{ 'active-link': $route.path.includes ('/todos') }">
-          <div></div> Todos</router-link>
+          <!-- <router-link :to="{ name: 'todos' }" :class="{ 'active-link': $route.path.includes('/todos') }">
+            <div></div> Todos
+          </router-link> -->
         </div>
-     
+
         <div>
-         <router-link  :to="{name: 'posts'}" 
-         :class="{ 'active-link': $route.path.includes ('/posts') }">
-         <div></div> 
-          Posts</router-link>
+          <!-- <router-link :to="{ name: 'posts' }" :class="{ 'active-link': $route.path.includes('/posts') }">
+            <div></div>
+            Posts
+          </router-link> -->
         </div>
-        
+
         <div>
-         <router-link :to="{name: 'albums'}"
-          :class="{ 'active-link': $route.path.includes('/albums') }">
-          <div></div> 
-          Albums
-        </router-link>
+          <!-- <router-link :to="{ name: 'albums' }" :class="{ 'active-link': $route.path.includes('/albums') }">
+            <div></div>
+            Albums
+          </router-link> -->
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -73,13 +72,15 @@ const userStore = useUserStore();
   margin-top: 10px;
 }
 
-.user-iconn > div {
+.user-iconn>div {
   margin: 10px;
 }
-.user-profil > div> p {
-font-size: small;
+
+.user-profil>div>p {
+  font-size: small;
 }
-.user-iconn > div > a {
+
+.user-iconn>div>a {
   text-decoration: none;
 
   display: flex;
@@ -96,13 +97,13 @@ font-size: small;
   border-radius: 5px;
 }
 
-.user-iconn > div > a > div {
+.user-iconn>div>a>div {
   margin-right: 10px;
 }
 
 /* Opsiyonel */
 /* Önerilen: Tüm linkleri birbirinden ayırarak stil verin. */
-.user-iconn > div > a:not(:last-child) {
+.user-iconn>div>a:not(:last-child) {
   margin-bottom: 10px;
 }
 
@@ -112,5 +113,4 @@ svg {
   height: 24px;
   margin-right: 5px;
 }
-
 </style>

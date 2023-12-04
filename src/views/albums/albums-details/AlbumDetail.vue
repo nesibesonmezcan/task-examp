@@ -1,37 +1,31 @@
 <template>
-    <v-container>
-      <v-row>
-        <v-col v-for="photo in userStore.photos" :key="photo.id">
-          <v-card
-        
-            class="mx-auto"
-            max-width="200"
-            height="200"
-            title="Card title"
-            theme="dark"
-          >
-          {{ album.title }}
-          <img src="{album.url}" alt="">
-        </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </template>
-  
-  <script setup>
-  import { useUserStore } from '@/store/userStore';
-  import { onBeforeMount } from 'vue';
-  import { useRoute } from 'vue-router';
-  
-  const userStore = useUserStore();
-  const route = useRoute();
-  
-  onBeforeMount(async () => {
-    const albumId = route.params.id;
-    const filter = {
-      albumId: albumId,
+  <div>
+    <v-btn @click="updateValue('x')">a</v-btn>
+    <v-btn @click="updateValue('y')">b</v-btn>
+    <v-btn @click="updateValue('z')">c</v-btn>
+  </div>
+  <div>
+    <p>{{ currentValue }}</p>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      ankara: {
+        x: 3,
+        y: 5,
+        z: 8
+      },
+      currentValue: null
     };
-    await userStore.fetchPhotos(filter);
-  });
-  </script>
-  
+  },
+  methods: {
+    updateValue(key) {
+      this.currentValue = this.ankara[key];
+    }
+  }
+};
+</script>
+
