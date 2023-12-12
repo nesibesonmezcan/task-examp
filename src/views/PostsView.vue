@@ -1,94 +1,76 @@
 <template>
-  <main>
-    <div v-for="post in userStore.posts" :key="post.id">
-      {{ post.userId }}
+  <v-main>
+
+    <div class="post-page" v-for="post in userStore.posts" :key="post.id">
+      <div>
+        <h4>{{ post.title }}</h4>
+        <p>{{ post.body }}</p>
+      </div>
+      <div class="post-button">
+        <h5>See More</h5>
+
+
+        <v-dialog width="500">
+          <template v-slot:activator="{ props }">
+            <v-btn class="post-icon" v-bind="props" rounded="sm" icon="mdi-arrow-right-bold-circle-outline"> </v-btn>
+          </template>
+
+          <template v-slot:default="{ isActive }">
+            <v-card title="Dialog">
+              <v-btn icon="mdi-close-circle-outline" @click="isActive.value = false"></v-btn>
+              <v-card-text>
+                {{ post.body }}
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+
+              </v-card-actions>
+            </v-card>
+          </template>
+        </v-dialog>
+
+      </div>
     </div>
 
 
 
-  </main>
+  </v-main>
 </template>
   
 <script setup>
-
-import router from '@/router'
-
-
 import { useUserStore } from "@/store/userStore";
-
 import { onBeforeMount } from "vue";
-
 import { useRoute } from 'vue-router';
 
-
 const route = useRoute()
-
 const userStore = useUserStore();
 
 console.log(" la ibo", route.meta);
+
 onBeforeMount(async () => {
-  const userId = route.params.id
+  const userId = route.params.user_id
   const filter = {
     userId: userId,
   }
-  console.log(filter)
+  console.log("filterpost", filter)
   await userStore.fetchPosts(filter);
 });
 </script>
-<!-- 
-// <template>
-//   <div class="text-center" v-for="post in userStore.posts" :key="post.id">
 
-//   <div>
-//     {{ post.id }} {{ post.title }}
-//   </div>
-//   <div>
-//     {{ post.body }}
-//   </div>
-//   See more<v-btn>
-//     <v-dialog v-model="dialog" activator="parent" width="auto">
-//       <v-card>
-//         <v-card-text>
-//           {{ post.body }} </v-card-text>
-//         <v-card-actions>
-//           <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
-//       </v-card-actions>
-//     </v-card>
-//   </v-dialog>
-// </v-btn>
-//   </div >
-// </template >
+<style>
+.post-page {
+  padding: 15px;
+}
 
+.post-button {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
 
-//   <script setup>
-
-//     import router from '@/router'
-//     import {useUserStore} from "@/store/userStore";
-//     import {ref} from 'vue';
-//     import {onBeforeMount} from "vue";
-//     import {useRoute} from 'vue-router';
-
-//     const route = useRoute()
-//     const userStore = useUserStore();
-//     const dialog = ref(false)
-//     console.log(" la ibo", route.meta);
-// onBeforeMount(async () => {
-//   const userId = route.params.id
-//     const filter = {
-//       userId: userId,
-//   }
-//     console.log(filter)
-//     await userStore.fetchPosts(filter);
-// });
-
-
-
-// </script>
-
-
-// <style scoped>
-// div {
-//   padding: 25px;
-// }
-// </style>
-   -->
+.post-icon {
+  background-color: none;
+}
+</style>

@@ -34,6 +34,19 @@ export const useUserStore = defineStore("userStore", {
         console.error("Error fetching post data:", error);
       }
     },
+
+    async fetchTodos(params = {}) {
+      try {
+        console.log("todosstore", params);
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/todos",
+          { params: params }
+        );
+        this.todos = response.data;
+      } catch (error) {
+        console.error("Error fetching todos data:", error);
+      }
+    },
     async fetchAlbums(params = {}) {
       try {
         console.log("storeAlbums", params);
@@ -58,17 +71,17 @@ export const useUserStore = defineStore("userStore", {
         console.error("Error fetching album data:", error);
       }
     },
-    selectUserById(id) {
+    selectUserById(user_id) {
       if (this.users) {
-        this.selectedUser = this.users.find((user) => user.id === id);
+        this.selectedUser = this.users.find((user) => user.id === user_id);
       } else {
         console.error("Users data is not available.");
       }
     },
 
-    selectedAlbumById(id) {
+    selectedAlbumById(album_id) {
       if (this.albums) {
-        this.selectedAlbum = this.albums.find((album) => album.id === id);
+        this.selectedAlbum = this.albums.find((album) => album.id === album_id);
       } else {
         console.error("Users data is not available.");
       }

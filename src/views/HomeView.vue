@@ -6,7 +6,7 @@
         <v-progress-linear v-if="loading" indeterminate color="yellow-darken-2"></v-progress-linear>
         <v-col v-else v-for="user in userStore.users" :key="user.id" cols="4">
           <RouterLink :to="{ name: 'user-view', params: { user_id: user.id } }" class="router-link">
-            <v-card @click=" goToDetail(user)" height="300" width="300" class="card-user">
+            <v-card @click=" goToDetail(user)" height="400" width="auto" class="card-user">
               <v-row class="top-user">
                 <v-col>
                   <v-img src="/clean1.jpg" class="user-logo-img" height="90" width="90" />
@@ -18,12 +18,15 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col>
-                  <h3>Location</h3>
-                  {{ user.address.city }}
-                  <h3>Company</h3>
+                <v-col class="p-3">
+                  <v-card-title>
+                    <div>Location</div>
+                    <div> {{ user.address.city }}</div>
+
+                  </v-card-title>
+                  <v-card-title>Company</v-card-title>
                   {{ user.company.name }}
-                  <h3>website</h3>
+                  <v-card-title>website</v-card-title>
                   {{ user.website }}
                 </v-col>
               </v-row>
@@ -36,19 +39,17 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-
-// 'useUserStore' mağazasını içe aktarıyoruz, bu mağaza Vue bileşenindeki kullanıcı durumunu yönetmek için kullanılır
+import { onBeforeMount, ref } from 'vue';
 import { useUserStore } from "@/store/userStore"
 
 const userStore = useUserStore();
 const loading = ref(false);
 
-onMounted(async () => {
+onBeforeMount(async () => {
 
-  console.log("calisti")
+  console.log("calisti LE")
   loading.value = true
-  // await userStore.fetchUsers();
+  await userStore.fetchUsers();
   loading.value = false
 });
 

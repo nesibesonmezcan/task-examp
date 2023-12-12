@@ -1,38 +1,40 @@
-
 <template>
-  <div>
-    <v-checkbox v-for="exam in exams" :key="exam" class=" exam-question">
-      {{ exam.title }}
+  <v-main class="exam-question" v-for="todo in userStore.todos" :key="todo.id">
+
+    <v-checkbox v-model="checkbox">
+      <template v-slot:label>
+        <div>
+          {{ todo.title }}
+        </div>
+      </template>
     </v-checkbox>
-  </div>
+  </v-main>
 </template>
 
 <script setup>
+import { onBeforeMount, ref } from 'vue'
+import { useUserStore } from "@/store/userStore";
+import { useRoute } from "vue-router";
+const checkbox = ref(false);
+const userStore = useUserStore()
+const loading = ref(false);
+const route = useRoute()
 
+onBeforeMount(async () => {
+  loading.value = true
 
-import router from "@/router";
-import examsData from "../data2.json"
-import { ref } from 'vue'
-const exams = ref(examsData)
+  const userId = route.params.user_id
 
+  const filter = {
+    userId: userId
+  }
 
+  await userStore.fetchTodos(filter)
+  loading.value = false
+  console.log("la beb", route.params.user_id)
 
+});
 
 </script>
-<style scoped>
-.container {
-  background-color: red;
-}
 
-.v-selection-control__wrapper {}
-
-.exam-question {
-  padding: 10px 30px 10px 100px;
-  width: auto !important;
-}
-
-.exam-question:first-child {
-  padding-top: 50px;
-
-}
-</style>
+<style scoped></style>

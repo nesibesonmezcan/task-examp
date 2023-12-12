@@ -1,11 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-const routes = [
+export const routes = [
   {
-    path: "/", // Parametre üst düzeyde tanımlanmalı
+    path: "/",
     component: () => import("@/layouts/default/Default.vue"),
     redirect: { name: "Home" },
-
     children: [
       {
         path: "home",
@@ -33,6 +32,7 @@ const routes = [
           },
           {
             path: "albums",
+            name: "albums",
             component: () => import("@/layouts/default/AlbumsDefault.vue"),
             meta: { title: "Albums" },
             children: [
@@ -63,6 +63,7 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
   console.log("gdidiyo ", from, to);
+  router.onError();
 });
 
 export default router;

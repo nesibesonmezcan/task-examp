@@ -5,7 +5,7 @@
       <div class="navigation-drawer">
         <component :is="dynamicComponent" />
         <div class="logo">
-          <img src="/image 1.png" class="user-logo-img" />
+          <img src="/image1.png" class="user-logo-img" />
           <p>N2MOBİL</p>
 
         </div>
@@ -14,9 +14,11 @@
     </v-navigation-drawer>
 
 
-    <v-main>
+    <div>
       <router-view></router-view>
-    </v-main>
+
+    </div>
+
 
   </v-app>
 </template>
@@ -35,9 +37,9 @@ const drawer = ref(true)
 const route = useRoute()
 
 watch(() =>
-  route.name,
+  route.children.name,
   () => {
-    if (route.name === "home") {
+    if (route.children.name === "Home") {
       dynamicComponent.value = (UserLeft)
     } else {
       dynamicComponent.value = (UserProfil)

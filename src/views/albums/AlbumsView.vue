@@ -1,6 +1,7 @@
 <template>
-  <main v-for="album in userStore.albums" :key="album.id">
-    <RouterLink :to="{ name: 'album-detail', params: { album_id: album.id } }">
+  <v-main>
+    <RouterLink v-for="album in userStore.albums" :key="album.id"
+      :to="{ name: 'album-detail', params: { album_id: album.id } }">
       <v-card class="" max-width="400" @click="goToAlbums(album)">
 
         <v-img class="align-end text-white" height="300" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
@@ -9,42 +10,35 @@
 
         <v-card-title> {{ album.title }}</v-card-title>
 
+
       </v-card>
     </RouterLink>
-  </main>
+  </v-main>
 </template>
 
 
-<!-- <template>
-  <v-container>
-   
- 
-      <v-btn 
-      </v-btn>
-    
-  </v-container>
-</template> -->
-
 <script setup>
-
-import router from '@/router'
+import { onBeforeMount, ref } from 'vue'
 import { useUserStore } from "@/store/userStore";
-import { onBeforeMount } from "vue";
 import { useRoute } from 'vue-router';
 
+const userStore = useUserStore()
 const route = useRoute()
-const userStore = useUserStore();
+const loading = ref(false);
 
-console.log("la", route);
 onBeforeMount(async () => {
-  const userId = route.params.id
+  loading.value = true
+
+  const userId = route.params.user_id
   const filter = {
-    userId: userId,
+    userId: userId
   }
-  console.log(filter)
-  await userStore.fetchAlbums(filter);
+  console.log("filteralbum", filter)
+  await userStore.fetchAlbums(filter)
+  loading.value = false
+
 });
 const goToAlbums = (album) => {
-  userStore.selectedAlbum = album
+  userStore.selectedAlbumById = album
 }
 </script>
