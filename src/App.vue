@@ -1,56 +1,46 @@
 <template>
   <v-app id="app">
-
     <v-navigation-drawer v-model="drawer">
       <div class="navigation-drawer">
         <component :is="dynamicComponent" />
         <div class="logo">
           <img src="/image1.png" class="user-logo-img" />
           <p>N2MOBİL</p>
-
         </div>
       </div>
-
     </v-navigation-drawer>
-
-
-    <div>
+    <v-main>
       <router-view></router-view>
-
-    </div>
-
-
+    </v-main>
   </v-app>
 </template>
 
 <script setup>
-import UserLeft from '@/components/UserLeft.vue'
-import UserProfil from './components/UserProfil.vue';
+import UserLeft from "@/components/UserLeft.vue";
+import UserProfil from "./components/UserProfil.vue";
 
-import { RouterView } from "vue-router"
-import { ref, shallowRef, watch } from 'vue';
-import { useRoute } from 'vue-router'
-import { watchEffect } from 'vue';
+import { RouterView } from "vue-router";
+import { ref, shallowRef, watch } from "vue";
+import { useRoute } from "vue-router";
+import { watchEffect } from "vue";
 
+const drawer = ref(true);
+const route = useRoute();
 
-const drawer = ref(true)
-const route = useRoute()
-
-watch(() =>
-  route.children.name,
+watch(
+  () => route.path,
   () => {
-    if (route.children.name === "Home") {
-      dynamicComponent.value = (UserLeft)
+    if (route.params.user_id) {
+      dynamicComponent.value = UserProfil;
     } else {
-      dynamicComponent.value = (UserProfil)
+      dynamicComponent.value = UserLeft;
     }
-  })
+  }
+);
 
-const dynamicComponent = shallowRef(UserLeft)
+const dynamicComponent = shallowRef(UserLeft);
 
-
-
-const title = ref('N2MOBİL');
+const title = ref("N2MOBİL");
 
 watchEffect(() => {
   document.title = route.meta.title || title.value;
@@ -64,7 +54,7 @@ watchEffect(() => {
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  background-color: #D8D9DD;
+  background-color: #d8d9dd;
 }
 
 .logo {
