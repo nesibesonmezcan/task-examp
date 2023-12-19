@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+// Örnek refactored rota yapısı
 export const routes = [
   {
     path: "/",
-    component: () => import("@/layouts/default/Default.vue"),
     redirect: { name: "Home" },
+    component: () => import("@/layouts/default/Default.vue"),
     children: [
       {
         path: "home",
@@ -16,7 +17,6 @@ export const routes = [
         name: "user-view",
         component: () => import("@/layouts/default/UserLayout.vue"),
         redirect: { name: "todos" },
-        meta: { title: "Ana Sayfa" },
         children: [
           {
             path: "todos",
@@ -32,17 +32,17 @@ export const routes = [
           },
           {
             path: "albums",
-            name: "albums",
             component: () => import("@/layouts/default/AlbumsDefault.vue"),
-            meta: { title: "Albums" },
+            redirect: { name: "albums" },
             children: [
               {
-                path: "", // Albums sayfasının detayları için
+                path: "",
                 name: "albums",
                 component: () => import("@/views/albums/AlbumsView.vue"),
+                meta: { title: "Albums" },
               },
               {
-                path: "album-detail/:album_id", // Albüm detayları için ID ile
+                path: "album-detail/:album_id",
                 name: "album-detail",
                 component: () =>
                   import("@/views/albums/albums-details/AlbumDetail.vue"),
@@ -59,11 +59,6 @@ export const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-});
-
-router.beforeEach((to, from) => {
-  console.log("gdidiyo ", from, to);
-  router.onError();
 });
 
 export default router;

@@ -7,7 +7,10 @@ export const useUserStore = defineStore("userStore", {
     todos: null,
     posts: null,
     albums: null,
+    comments: null,
     selectedUser: null,
+    selectedPost: null,
+    selectedAlbum: null,
   }),
 
   actions: {
@@ -71,21 +74,47 @@ export const useUserStore = defineStore("userStore", {
         console.error("Error fetching album data:", error);
       }
     },
-    selectUserById(user_id) {
-      if (this.users) {
-        this.selectedUser = this.users.find((user) => user.id === user_id);
-      } else {
-        console.error("Users data is not available.");
-      }
-    },
-
-    selectedAlbumById(album_id) {
-      if (this.albums) {
-        this.selectedAlbum = this.albums.find((album) => album.id === album_id);
-      } else {
-        console.error("Users data is not available.");
+    async fetchComments(params) {
+      try {
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/comments",
+          { params: params }
+        );
+        this.comments = response.data;
+      } catch (error) {
+        console.error("Error fetching comments data:", error);
       }
     },
   },
+
+  getters: {
+    selectedAlbumById: (state) => (album_id) => {
+      const album = state.albums
+        ? state.albums.find((album) => album.id === album_id)
+        : null;
+      return album ? { ...album } : null;
+    },
+
+    selectedPostById: (state) => (post_id) => {
+      const posts = state.posts || [];
+      const comments = state.comments || [];
+      const post = posts.find((post) => post.id === post_id);
+
+      const filteredComments = comments.filter(
+        (comment) => comment.postId === post_id
+      );
+
+      console.log("state1", state.posts);
+      console.log("state2,", state.comments);
+      console.log("state3,", filteredComments);
+      console.log("state4,", post);
+
+      return {
+        post: post ? { ...post } : null,
+        comments: [...filteredComments],
+      };
+    },
+  },
+
   persist: true,
 });
