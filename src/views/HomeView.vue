@@ -7,7 +7,7 @@
         indeterminate
         color="yellow-darken-2"
       ></v-progress-linear>
-      <v-col v-else v-for="user in userStore.users" :key="user.id" cols="4">
+      <v-col v-for="user in userStore.users" :key="user.id" cols="4">
         <RouterLink
           :to="{ name: 'user-view', params: { user_id: user.id } }"
           class="router-link"
