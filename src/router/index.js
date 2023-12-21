@@ -32,6 +32,7 @@ export const routes = [
           },
           {
             path: "albums",
+            name: "albums",
             component: () => import("@/layouts/default/AlbumsDefault.vue"),
             redirect: { name: "albums" },
             children: [
@@ -60,5 +61,4 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-
 export default router;

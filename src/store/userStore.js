@@ -27,12 +27,12 @@ export const useUserStore = defineStore("userStore", {
 
     async fetchPosts(params = {}) {
       try {
-        console.log("store", params);
         const response = await axios.get(
           "https://jsonplaceholder.typicode.com/posts",
           { params: params }
         );
         this.posts = response.data;
+        console.log("gel", params.post);
       } catch (error) {
         console.error("Error fetching post data:", error);
       }
@@ -40,7 +40,6 @@ export const useUserStore = defineStore("userStore", {
 
     async fetchTodos(params = {}) {
       try {
-        console.log("todosstore", params);
         const response = await axios.get(
           "https://jsonplaceholder.typicode.com/todos",
           { params: params }
@@ -52,7 +51,6 @@ export const useUserStore = defineStore("userStore", {
     },
     async fetchAlbums(params = {}) {
       try {
-        console.log("storeAlbums", params);
         const response = await axios.get(
           "https://jsonplaceholder.typicode.com/albums",
           { params: params }
@@ -64,7 +62,6 @@ export const useUserStore = defineStore("userStore", {
     },
     async fetchPhotos(params = {}) {
       try {
-        console.log("storePhotos", params);
         const response = await axios.get(
           "https://jsonplaceholder.typicode.com/photos",
           { params: params }
@@ -74,7 +71,7 @@ export const useUserStore = defineStore("userStore", {
         console.error("Error fetching album data:", error);
       }
     },
-    async fetchComments(params) {
+    async fetchComments(params = {}) {
       try {
         const response = await axios.get(
           "https://jsonplaceholder.typicode.com/comments",
@@ -88,33 +85,23 @@ export const useUserStore = defineStore("userStore", {
   },
 
   getters: {
-    selectedAlbumById: (state) => (album_id) => {
-      const album = state.albums
-        ? state.albums.find((album) => album.id === album_id)
-        : null;
-      return album ? { ...album } : null;
+    selectUserById: (state) => (id) => {
+      if (state.users) {
+        return state.users.find((user) => user.id === id);
+      } else {
+        console.error("Users data is not available.");
+        return null;
+      }
     },
 
-    selectedPostById: (state) => (post_id) => {
-      const posts = state.posts || [];
-      const comments = state.comments || [];
-      const post = posts.find((post) => post.id === post_id);
-
-      const filteredComments = comments.filter(
-        (comment) => comment.postId === post_id
-      );
-
-      console.log("state1", state.posts);
-      console.log("state2,", state.comments);
-      console.log("state3,", filteredComments);
-      console.log("state4,", post);
-
-      return {
-        post: post ? { ...post } : null,
-        comments: [...filteredComments],
-      };
+    selectedAlbumById: (state) => (AlbumId) => {
+      if (state.albums) {
+        return state.albums.find((album) => album.id === AlbumId);
+      } else {
+        console.error("Albums data is not available.");
+        return null;
+      }
     },
   },
-
   persist: true,
 });

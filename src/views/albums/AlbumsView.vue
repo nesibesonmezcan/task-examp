@@ -1,20 +1,14 @@
 <template>
   <div v-for="album in userStore.albums" :key="album.id">
-    <RouterLink
-      :to="{ name: 'album-detail', params: { albumId_id: albumId.id } }"
+    <v-card
+      @click="selectedphotoId(album.id)"
+      max-width="200"
+      height="200"
+      image="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      theme="dark"
     >
-      <v-card class="" max-width="400" @click="selectAlbum(album)">
-        <v-img
-          class="align-end text-white"
-          height="300"
-          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-          cover
-        >
-        </v-img>
-
-        <v-card-title> {{ album.title }}</v-card-title>
-      </v-card>
-    </RouterLink>
+      <v-card-title>{{ album.title }} </v-card-title>
+    </v-card>
   </div>
 </template>
 
@@ -38,8 +32,9 @@ onBeforeMount(async () => {
   await userStore.fetchAlbums(filter);
   loading.value = false;
 });
+const selectedphotoId = ref(null);
 
-const selectAlbum = (album) => {
-  userStore.selectedAlbum = album;
+const selectedphoto = (albumId) => {
+  selectedphotoId.value = albumId;
 };
 </script>

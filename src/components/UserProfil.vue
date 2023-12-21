@@ -12,13 +12,14 @@
       <template
         v-for="route in routes[0].children[1].children"
         :key="route.name"
-      >
-        <router-link
-          :to="route.path"
-          :class="{ 'active-link': $route.path === '/' + route.name }"
-        >
-          {{ route.name }}
-        </router-link>
+        ><div>
+          <router-link
+            :to="route.path"
+            :class="{ 'active-link': $route.path === '/' + route.name }"
+          >
+            {{ route.name }}
+          </router-link>
+        </div>
       </template>
     </div>
   </div>
@@ -27,24 +28,44 @@
 <script setup>
 import { useUserStore } from "@/store/userStore";
 import { routes } from "@/router";
-// import { computed } from 'vue';
 
 const userStore = useUserStore();
-// const routes = computed(() => route.options.routes);
 </script>
 
-<style scoped>
-/* Stil Dosyası */
+<!-- <style scoped>
 .fill-height {
   height: 100%;
+  display: flex;
+  align-items: start;
+  padding: 15px;
+  justify-content: flex-start;
 }
-
+.router-link {
+  padding: 25px;
+  margin: 25px;
+  border: 1px solid red;
+  width: 50px;
+  height: auto;
+  text-decoration: none;
+}
+.router-link-active {
+  color: blue;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: aliceblue;
+  width: 100%;
+}
 .user-icons {
   display: flex;
   flex-direction: column;
   align-items: start;
-  background-color: aliceblue;
+  padding: 15px;
+  margin: 15px;
+  border: 2px solid rgb(0, 255, 119);
+  width: 100%;
+  height: auto;
 }
-
-/* Diğer stiller buraya */
-</style>
+.user-icons.a {
+  border: 1px solid rgb(0, 94, 255);
+}
+</style> -->
