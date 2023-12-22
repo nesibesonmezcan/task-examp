@@ -12,12 +12,7 @@
           :to="{ name: 'user-view', params: { user_id: user.id } }"
           class="router-link"
         >
-          <v-card
-            @click="goToDetail(user)"
-            height="400"
-            width="auto"
-            class="card-user"
-          >
+          <v-card height="400" width="auto" class="card-user">
             <v-row class="top-user">
               <v-col>
                 <v-img
@@ -64,10 +59,6 @@ onBeforeMount(async () => {
   await userStore.fetchUsers();
   loading.value = false;
 });
-
-const goToDetail = (user) => {
-  userStore.selectedUser = user;
-};
 </script>
 <style>
 .top-user {

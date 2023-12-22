@@ -56,6 +56,7 @@ export const useUserStore = defineStore("userStore", {
           { params: params }
         );
         this.albums = response.data;
+        return this.albums;
       } catch (error) {
         console.error("Error fetching album data:", error);
       }
@@ -66,6 +67,7 @@ export const useUserStore = defineStore("userStore", {
           "https://jsonplaceholder.typicode.com/photos",
           { params: params }
         );
+
         this.photos = response.data;
       } catch (error) {
         console.error("Error fetching album data:", error);
@@ -84,24 +86,5 @@ export const useUserStore = defineStore("userStore", {
     },
   },
 
-  getters: {
-    selectUserById: (state) => (id) => {
-      if (state.users) {
-        return state.users.find((user) => user.id === id);
-      } else {
-        console.error("Users data is not available.");
-        return null;
-      }
-    },
-
-    selectedAlbumById: (state) => (AlbumId) => {
-      if (state.albums) {
-        return state.albums.find((album) => album.id === AlbumId);
-      } else {
-        console.error("Albums data is not available.");
-        return null;
-      }
-    },
-  },
   persist: true,
 });

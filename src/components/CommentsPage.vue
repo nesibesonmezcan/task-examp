@@ -1,20 +1,20 @@
 <template>
   <div>
-    <h2>Comments</h2>
-    <div v-for="comment in userStore.comments" :key="comment.postId">
-      <v-progress-linear
-        v-if="loading"
-        indeterminate
-        color="yellow-darken-2"
-      ></v-progress-linear>
-
-      <p>
-        <strong>{{ comment.name }}:</strong>
-      </p>
-      <p>
-        {{ comment.body }}
-      </p>
-    </div>
+    <v-progress-linear
+      v-if="loading"
+      indeterminate
+      color="yellow-darken-2"
+    ></v-progress-linear>
+    <h2>Post Title</h2>
+    <v-row>
+      <v-col> </v-col>
+      <v-col>
+        <h4>Comments</h4>
+        <div v-for="comment in userStore.comments" :key="comment.postId">
+          <strong>{{ comment.name }}:</strong> {{ comment.body }}
+        </div>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

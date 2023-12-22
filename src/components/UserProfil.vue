@@ -12,10 +12,14 @@
       <template
         v-for="route in routes[0].children[1].children"
         :key="route.name"
-        ><div>
+      >
+        <div>
           <router-link
             :to="route.path"
-            :class="{ 'active-link': $route.path === '/' + route.name }"
+            :class="{
+              'bg-gray-100 bg-opacity-50 hover:bg-gray-200':
+                $route.path === '/' + route.name,
+            }"
           >
             {{ route.name }}
           </router-link>
@@ -32,40 +36,49 @@ import { routes } from "@/router";
 const userStore = useUserStore();
 </script>
 
-<!-- <style scoped>
-.fill-height {
-  height: 100%;
-  display: flex;
-  align-items: start;
-  padding: 15px;
-  justify-content: flex-start;
-}
-.router-link {
-  padding: 25px;
-  margin: 25px;
-  border: 1px solid red;
-  width: 50px;
-  height: auto;
-  text-decoration: none;
-}
+<style scoped>
 .router-link-active {
-  color: blue;
-  padding: 15px;
-  margin-bottom: 15px;
   background-color: aliceblue;
-  width: 100%;
+  padding: 15px;
+  width: 256px !important;
+  margin: 15px;
 }
+.fill-height {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 15px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-profile img {
+  margin-right: 15px;
+}
+
+.selected-name {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 .user-icons {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  padding: 15px;
-  margin: 15px;
-  border: 2px solid rgb(0, 255, 119);
-  width: 100%;
-  height: auto;
 }
-.user-icons.a {
-  border: 1px solid rgb(0, 94, 255);
+
+.user-icons div {
+  margin-bottom: 10px;
 }
-</style> -->
+
+.active-link {
+  color: blue;
+  font-weight: bold;
+}
+</style>

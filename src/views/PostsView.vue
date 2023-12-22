@@ -8,23 +8,13 @@
       <v-btn rounded="sm" icon="mdi-arrow-right"></v-btn>
       <h5>See More</h5>
     </div>
-
-    <v-dialog width="1100" height="auto" v-model="dialog">
-      <v-card>
-        <div>
-          <h2>Post Title</h2>
-          <v-row class="post-comment">
-            <v-col>
-              <p>{{ post.title }}</p>
-            </v-col>
-            <v-col>
-              <CommentsPage :selectedPostId="selectedPostId"></CommentsPage>
-            </v-col>
-          </v-row>
-        </div>
-      </v-card>
-    </v-dialog>
   </div>
+
+  <v-dialog width="1000" height="auto" v-model="dialog">
+    <v-card class="post-comment">
+      <CommentsPage :selectedPostId="selectedPostId"></CommentsPage>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script setup>
@@ -45,9 +35,9 @@ onBeforeMount(async () => {
   await userStore.fetchPosts(filter);
 });
 
-const selectedPostId = ref(); // Seçilen postun ID'sini tutacak referans
+const selectedPostId = ref();
 
-const getSelectedPost = (postId) => {
+const getSelectedPost = async (postId) => {
   dialog.value = true;
   selectedPostId.value = postId;
 };
