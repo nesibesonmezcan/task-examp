@@ -1,14 +1,17 @@
 <template>
-  <div v-for="album in userStore.albums" :key="album.id">
-    <v-card
-      @click="selectedphotoId(album.id)"
-      max-width="200"
-      height="200"
-      image="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-      theme="dark"
-    >
-      <v-card-title>{{ album.title }} </v-card-title>
-    </v-card>
+  <div>
+    <v-progress-linear
+      v-if="loading"
+      indeterminate
+      color="red-darken-2"
+    ></v-progress-linear>
+    <div v-for="album in albums" :key="album.id">
+      <RouterLink
+        :to="{ name: 'album-detail', params: { album_id: album.id } }"
+      >
+        {{ album.title }}
+      </RouterLink>
+    </div>
   </div>
 </template>
 
@@ -20,7 +23,7 @@ import { useRoute } from "vue-router";
 const userStore = useUserStore();
 const route = useRoute();
 const loading = ref(false);
-
+const albums = ref([]);
 onBeforeMount(async () => {
   loading.value = true;
 
@@ -28,13 +31,14 @@ onBeforeMount(async () => {
   const filter = {
     userId: userId,
   };
-  console.log("filteralbum", filter);
-  await userStore.fetchAlbums(filter);
+  albums.value = await userStore.fetchAlbums(filter);
+  console.log(albums.value);
   loading.value = false;
 });
-const selectedphotoId = ref(null);
 
-const selectedphoto = (albumId) => {
-  selectedphotoId.value = albumId;
-};
+// const selectedphotoId = ref(null);
+
+// const selectedphoto = (albumId) => {
+//   selectedphotoId.value = albumId;
+// };
 </script>
