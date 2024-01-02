@@ -27,7 +27,7 @@
 //
 </script>
 
-<style>
+<style scoped>
 .fill-height {
   width: 256px;
   padding: 15px 0;

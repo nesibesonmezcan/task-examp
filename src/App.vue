@@ -4,7 +4,7 @@
       <div class="navigation-drawer">
         <component :is="dynamicComponent" />
         <div class="logo">
-          <img src="/image1.png" class="user-logo-img" />
+          <v-avatar src="/image1.png" class="user-logo-img" />
           <p>N2MOBİL</p>
         </div>
       </div>

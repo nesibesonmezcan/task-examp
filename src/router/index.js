@@ -23,12 +23,14 @@ export const routes = [
             name: "todos",
             component: () => import("@/views/TodosView.vue"),
             meta: { title: "Todos" },
+           // icon: "mdi-arrow-left",
           },
           {
             path: "posts",
             name: "posts",
             component: () => import("@/views/PostsView.vue"),
             meta: { title: "Posts" },
+           // icon: "mdi-arrow-right",
           },
           {
             path: "albums",
