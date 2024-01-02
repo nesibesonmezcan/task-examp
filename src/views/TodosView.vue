@@ -1,10 +1,8 @@
 <template>
   <div class="exam-question" v-for="todo in userStore.todos" :key="todo.id">
-    <v-checkbox v-model="checkbox">
+    <v-checkbox class="" v-model="todo.completed">
       <template v-slot:label>
-        <div>
-          {{ todo.title }}
-        </div>
+        {{ todo.title }}
       </template>
     </v-checkbox>
   </div>
@@ -14,7 +12,6 @@
 import { onBeforeMount, ref } from "vue";
 import { useUserStore } from "@/store/userStore";
 import { useRoute } from "vue-router";
-const checkbox = ref(false);
 const userStore = useUserStore();
 const loading = ref(false);
 const route = useRoute();

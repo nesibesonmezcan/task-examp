@@ -32,7 +32,6 @@ export const useUserStore = defineStore("userStore", {
           { params: params }
         );
         this.posts = response.data;
-        console.log("gel", params.post);
       } catch (error) {
         console.error("Error fetching post data:", error);
       }
@@ -67,12 +66,14 @@ export const useUserStore = defineStore("userStore", {
           "https://jsonplaceholder.typicode.com/photos",
           { params: params }
         );
-
-        this.photos = response.data;
+        const fivePhotos = response.data.slice(0, 5);
+        this.photos = fivePhotos;
+        return fivePhotos;
       } catch (error) {
         console.error("Error fetching album data:", error);
       }
     },
+
     async fetchComments(params = {}) {
       try {
         const response = await axios.get(

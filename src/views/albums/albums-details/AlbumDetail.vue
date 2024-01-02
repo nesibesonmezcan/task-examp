@@ -1,8 +1,9 @@
 <template>
-  <div v-for="photo in userStore.photos" :key="photo.id">
-    <div>{{ photo.title }}</div>
-    <img :src="photo.thumbnailUrl" />
-  </div>
+  <v-row>
+    <v-col class="album-detail-img" :cols="2" v-for="photo in userStore.photos" :key="photo.id">
+      <img :src="photo.thumbnailUrl" />
+    </v-col>
+  </v-row>
 </template>
 
 <script setup>
@@ -23,6 +24,15 @@ onMounted(async () => {
   };
   await userStore.fetchPhotos(filter);
   loading.value = false;
-  console.log("la bebe", route.params.album_id);
 });
 </script>
+
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.album-detail-img{
+  margin: 15px !important;
+}
+</style>
