@@ -1,21 +1,50 @@
 <template>
-  <div class="post-page" v-for="post in userStore.posts" :key="post.id">
+  <div class="post-page ml-8 ma-0" v-for="post in userStore.posts" :key="post.id">
     <div>
-      <h4>{{ post.title }}</h4>
-      <p>{{ post.body }}</p>
+      <div cols="6">
+        <div class="w-1/2">
+          <h3 class="font-medium text-lg leading-5 racking-tighter">
+            Post Title
+          </h3>
+          <p class="font-normal text-sm leading-5 racking-tighter">
+            {{ post.title }}
+          </p>
+          <p class="font-normal text-sm leading-5 racking-tighter">
+            {{ post.body }}
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div @click="getSelectedPost(post)" class="post-button m-3">
+          <v-icon
+            class="rounded-lg border-2 border-purple-900 w-8 h-8"
+            icon="mdi-arrow-right"
+          >
+          </v-icon>
+          <p class="font-medium text-sm leading-5 p-6">See More</p>
+        </div>
+      </div>
     </div>
-    <div @click="getSelectedPost(post)" class="post-button">
-      <v-btn rounded="sm" icon="mdi-arrow-right"></v-btn>
-      <h5>See More</h5>
-    </div>
+    <hr />
   </div>
 
   <v-dialog width="1000" height="auto" v-model="dialog">
-    <v-card class="post-comment"><h1>Post Title</h1>
+    <v-card class="post-comment">
+      <div class="flex justify-between m-3">
+        <p class="font-medium text-2xl leading-5">Post Title</p>
+      <div @click="closeDialog">
+        <v-icon 
+        class="rounded-lg border-2 border-purple-900 w-8 h-8"
+        icon="mdi-alpha-x"
+      >
+      </v-icon>
+      </div>
+      </div>
       <v-row>
-        
         <v-col>
           <div class="m-2">
+            
             {{ selectedPost.title }}
           </div>
         </v-col>
@@ -51,14 +80,14 @@ const getSelectedPost = async (post) => {
 
   selectedPost.value = post;
 };
+const closeDialog =()=>{
+  dialog.value = false;
+
+}
 </script>
 
-<style>
-h1 {
-  margin: 5px;
-  padding: 5px;
-  margin-left: 15px;
-}
+<style scoped>
+
 .post-page {
   padding: 15px;
 }
@@ -72,74 +101,3 @@ h1 {
   align-items: center;
 }
 </style>
-
-<!-- <template>
-  <div>
-    <div class="post-page" v-for="post in userStore.posts" :key="post.id">
-      <div>
-        <h4>{{ post.title }}</h4>
-        <p>{{ post.body }}</p>
-      </div>
-      <div @click="getSelectedPost(post.id)" class="post-button">
-        <h5 class="px-3 text-sm md:text-base  ">See More</h5>
-        <v-btn
-          icon="mdi-arrow-right"
-          class="rounded-lg border-indigo-500/75"
-        ></v-btn>
-      </div>
-
-      <v-dialog width="1000" height="auto" v-model="dialog">
-        <v-card class="post-comment">
-          <CommentsPage
-            :selectedPostId="selectedPostId"
-            :postTitle="post.body"
-          ></CommentsPage>
-        </v-card> </v-dialog
-      >
-    </div>
-  </div>
-</template>
-
-<script setup>
-import CommentsPage from "@/components/CommentsPage";
-import { useUserStore } from "@/store/userStore";
-import { ref, onBeforeMount } from "vue";
-import { useRoute } from "vue-router";
-
-const route = useRoute();
-const dialog = ref(false);
-const userStore = useUserStore();
-onBeforeMount(async () => {
-  const userId = route.params.user_id;
-  const filter = {
-    userId: userId,
-  };
-  await userStore.fetchPosts(filter);
-});
-const selectedPostId = ref();
-
-const getSelectedPost = async (postId) => {
-  dialog.value = true;
-  //selectedPostId.value = postId;
-};
-</script>
-
-<style>
-h1 {
-  margin: 5px;
-  padding: 5px;
-  margin-left: 15px;
-}
-.post-page {
-  padding: 15px;
-}
-.post-comment {
-  padding: 5px;
-  margin: 5px;
-}
-.post-button {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-</style> -->

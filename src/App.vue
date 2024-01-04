@@ -1,11 +1,15 @@
 <template>
   <v-app id="app">
     <v-navigation-drawer v-model="drawer">
-      <div class="navigation-drawer">
+      <div class="navigation-drawer  !flex !justify-between">
         <component :is="dynamicComponent" />
-        <div class="logo">
-          <v-avatar src="/image1.png" class="user-logo-img" />
-          <p>N2MOBİL</p>
+        <hr>,
+        <div class=" flex  ">
+       
+          <v-avatar >
+            <img src="/image1.png" class="user-logo-img mr-4"  alt="">
+          </v-avatar>
+          <p class="font-bold text-xl leading-8 !text-gray-800 ">N2MOBİL</p>
         </div>
       </div>
     </v-navigation-drawer>
@@ -47,7 +51,7 @@ watchEffect(() => {
 });
 </script>
 
-<style>
+<style scoped>
 .navigation-drawer {
   display: flex;
   flex-direction: column;
@@ -57,10 +61,4 @@ watchEffect(() => {
   background-color: #d8d9dd;
 }
 
-.logo {
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-}
 </style>

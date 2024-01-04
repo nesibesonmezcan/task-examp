@@ -1,9 +1,13 @@
 <template>
-  <v-row>
-    <v-col class="album-detail-img" :cols="2" v-for="photo in userStore.photos" :key="photo.id">
-      <img :src="photo.thumbnailUrl" />
-    </v-col>
-  </v-row>
+  <div class="flex">
+    <div
+      class="album-detail-img"
+      v-for="photo in userStore.photos"
+      :key="photo.id"
+    >
+      <img class="p-4 !flex" :src="photo.thumbnailUrl" />
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -27,12 +31,4 @@ onMounted(async () => {
 });
 </script>
 
-<style>
-*{
-  margin: 0;
-  padding: 0;
-}
-.album-detail-img{
-  margin: 15px !important;
-}
-</style>
+<style scoped></style>

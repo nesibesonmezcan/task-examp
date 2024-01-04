@@ -23,18 +23,19 @@ export const routes = [
             name: "todos",
             component: () => import("@/views/TodosView.vue"),
             meta: { title: "Todos" },
-           // icon: "mdi-arrow-left",
+            icon: "mdi-image-check-outline",
           },
           {
             path: "posts",
             name: "posts",
             component: () => import("@/views/PostsView.vue"),
             meta: { title: "Posts" },
-           // icon: "mdi-arrow-right",
+            icon: "mdi-note-search-outline",
           },
           {
             path: "albums",
             name: "albums",
+            icon: "mdi-image-album",
             component: () => import("@/layouts/default/AlbumsDefault.vue"),
             redirect: { name: "albums" },
             children: [
