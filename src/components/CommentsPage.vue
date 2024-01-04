@@ -6,10 +6,10 @@
       color="yellow-darken-2"
     ></v-progress-linear>
 
-    <h4 class="text-black-900">Comments</h4>
+    <h4 class="size-lg leading-8 font-semibold text-red">Comments</h4>
     <div v-for="comment in userStore.comments" :key="comment.postId">
-      <strong class="text-black-300">{{ comment.name }}:</strong>
-      {{ comment.body }}
+      <p><strong class="text-black-900 scroll-smooth">{{ comment.name }}:</strong></p>
+      <p>{{ comment.body }}</p>
     </div>
   </div>
 </template>

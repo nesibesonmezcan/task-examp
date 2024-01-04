@@ -1,8 +1,6 @@
 <template>
   <v-container>
-    <h2
-      class="text-bold py-2 px-5"
-    >
+    <h2 class="font-lg text-xl fond-semibold leading-5 font-poppins p-5">
       All Users
     </h2>
     <v-row class="card-row">
@@ -16,36 +14,47 @@
           :to="{ name: 'user-view', params: { user_id: user.id } }"
           class="router-link"
         >
-          <v-card height="350" width="auto" class="card-user" no-gutter>
-            <v-row no-gutters="false" class="top-user">
-              <v-avatar size="100" image="/clean1.jpg" />
-              <v-col class="user-profil-name">
-                <v-card-title class="ellipsis">{{ user.name }}</v-card-title>
-                <v-card-subtitle class="ellipsis">{{
-                  user.address.zipcode
-                }}</v-card-subtitle>
-                <v-card-subtitle class="ellipsis">{{
-                  user.email
-                }}</v-card-subtitle>
-              </v-col>
-            </v-row>
+          <v-card
+          
+            
+            class="card-user rounded-xl !h-80 border-2 p-5 "
+          >
+            <div
+              no-gutters="false"
+              class="top-user flex align-center m-2 p-2"
+            >
+              <v-avatar class="h-25 w-25" image="/clean1.jpg" />
+              <div class="user-profil-name justify-center align-center ml-5">
+                <div class="font-medium leading- text-sm g-2">
+                  {{ user.name }}
+                </div>
+                <p class="font-light text-sm leading-3">
+                  {{ user.address.zipcode }}
+                </p>
+                <p class="font-light text-sm leading-3">{{ user.email }}</p>
+              </div>
+            </div>
             <v-row>
-              <v-col class="p-3 personal-information">
-                <v-card-title>
+              <v-col class="peg2rsonal-information text-sm g-2">
+                <div class="font-medium leading- text-sm m-3">
                   <v-icon rounded="md" left>mdi-map-marker</v-icon>
                   Location
-                </v-card-title>
-                <v-card-subtitle> {{ user.address.city }}</v-card-subtitle>
-                <v-card-title>
+                  <p class="font-light text-sm leading-3">
+                    {{ user.address.city }}
+                  </p>
+                </div>
+                <div class="font-medium leading- text-sm m-3">
                   <v-icon rounded="md" left>mdi-domain</v-icon>
                   Company
-                </v-card-title>
-                <v-card-subtitle> {{ user.company.name }}</v-card-subtitle>
-                <v-card-title>
+                  <p class="font-light text-sm leading-3">
+                    {{ user.company.name }}
+                  </p>
+                </div>
+                <div class="font-medium leading- text-sm m-3">
                   <v-icon rounded="md" left>mdi-earth</v-icon>
                   Website
-                </v-card-title>
-                <v-card-subtitle> {{ user.website }} </v-card-subtitle>
+                  <p class="font-light text-sm leading-3">{{ user.website }}</p>
+                </div>
               </v-col>
             </v-row>
           </v-card>
@@ -70,44 +79,13 @@ onBeforeMount(async () => {
 </script>
 
 <style scoped>
-.ellipsis {
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-}
-.top-user {
-  text-wrap: nowrap !important;
-  overflow: hidden !important;
-}
-
 .router-link {
   text-decoration: none;
 }
 
-.user-logo-img {
-  border: 1px solid red;
-  border-radius: 50%;
-  margin: 15px;
-}
-.user-logo-img > div > img.v-img__img--contain {
-  object-fit: inherit !important;
-  background-color: red !important;
-}
 .card-user {
   bottom: 2px solid black;
   margin: 5px;
   padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.219) !important;
-}
-.user-profil-name {
-}
-.user-profil-name.v-card-title {
-  background-color: blueviolet !important;
-}
-.personal-information > .v-card-title {
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-  font-size: 1rem;
 }
 </style>

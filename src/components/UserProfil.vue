@@ -15,29 +15,29 @@
       <hr />
     </div>
 
-    <div>
+    <div class="pb-6">
       <template
         v-for="(route, index) in routes[0].children[1].children"
         :key="index"
-      >
-        <div class="user-icon">
-          <router-link
-            :to="route.path"
-            :class="{ active: $route.path.includes(route.name) }"
-          >
-            <span class="ank">{{ route.name }}</span>
-          </router-link>
-        </div>
+        ><router-link
+          :to="route.path"
+          :class="{ active: $route.path.includes(route.name) }"
+        >
+          <div class="user-icon pl-7 text-purple-800">
+            <v-icon :icon="route.icon"></v-icon>
+            <span  class="">{{ route.name }}</span>
+          </div>
+        </router-link>
       </template>
     </div>
   </div>
 </template>
-
 <script setup>
 import { useUserStore } from "@/store/userStore";
 import { routes } from "@/router";
 
 const userStore = useUserStore();
+
 </script>
 
 <style scoped>
@@ -56,23 +56,16 @@ const userStore = useUserStore();
   width: 256px;
   height: 40px;
   align-items: center;
-  gap: 25px;
+  color: blue!;
 }
 .active::before {
   content: "";
   width: 5px;
   height: 40px;
   background-color: #4f359b;
-  border-radius: 0  3px 3px 0;
-  gap: 25px;
-
+  border-radius: 0 3px 3px 0;
 }
-.ank{
-left: 25px;
-gap: 25px !important;
-display: flex;
 
-}
 .user-icon {
   text-decoration: none;
   width: 256px;

@@ -1,7 +1,15 @@
 <template>
-  <header class="d-flex align-items-center justify-flex-start">
-    <v-btn @click="router.back()"  rounded="lg" icon="mdi-arrow-left" ></v-btn>
-    <h2 >{{ title }}</h2>
+  <header class="flex items-center m-6">
+    <v-icon
+      class="rounded-lg border-2 border-black h-8 w-8 ma-2"
+      @click="router.back()"
+      icon="mdi-arrow-left"
+    ></v-icon>
+    <strong>
+      <h2 class=" ">
+        {{ title }}
+      </h2>
+    </strong>
   </header>
 </template>
 
@@ -19,14 +27,6 @@ const titles = {
   "album-detail": "GO ALBUMS",
 };
 
-const title = computed(() => titles[route.name] || "All Users");
+const title = computed(() => titles[route.name] || "");
 </script>
-<style scoped>
-header {
-    margin: 5px;
-  align-items: center !important;
-}
-h2{
-    margin: 5px;
-}
-</style>
+<style scoped></style>

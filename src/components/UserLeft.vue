@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="fill-height">
-      <div class="d-flex user-icon">
+
+      <div class="user-icon g-7">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -17,29 +18,38 @@
             stroke-linejoin="round"
           />
         </svg>
-        <p>Users</p>
+        <p class="text-purple font-normal text-lg leading-7">Users</p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-//
 </script>
 
 <style scoped>
 .fill-height {
   width: 256px;
-  padding: 15px 0;
-  margin: 0 35px 35px;
-  display: flex; /* Burada flex konteynerini belirtin */
+  height: 40px;
+  padding: 40px 0;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
+.user-icon::before {
+  content: "";
+  width: 5px;
+  height: 40px;
+  background-color: #4f359b;
+  border-radius: 0 3px 3px 0;
+  margin:0 15px 0 0; 
+}
 .user-icon {
-  padding: 15px 0;
-  margin: 10px 0;
+  left: 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   background-color: white;
+  gap: 20px;
 }
 </style>

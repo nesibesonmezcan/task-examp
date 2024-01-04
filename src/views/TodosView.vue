@@ -1,8 +1,10 @@
 <template>
-  <div class="exam-question" v-for="todo in userStore.todos" :key="todo.id">
-    <v-checkbox class="" v-model="todo.completed">
-      <template v-slot:label>
-        {{ todo.title }}
+  <div class="" v-for="todo in userStore.todos" :key="todo.id">
+    <v-checkbox class="h-12 ml-8 text-purple-900 " v-model="todo.completed">
+      <template v-slot:label >
+        <div class=" leading-5 font-normal text-sm text-black"> Lorem ipsum dolor sit amet consectetur.
+          {{ todo.title }}
+        </div>
       </template>
     </v-checkbox>
   </div>
@@ -27,8 +29,9 @@ onBeforeMount(async () => {
 
   await userStore.fetchTodos(filter);
   loading.value = false;
-  console.log("la beb", route.params.user_id);
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
